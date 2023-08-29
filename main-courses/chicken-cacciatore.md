@@ -6,7 +6,7 @@
 | --- | --- | --- | --- |
 | olive oil | 1 | tbsp | |
 | prosciutto | 3 | slices | fat removed & chopped |
-| onion | 1 | | medium, chopped |
+| onion | 1 | bulb | medium, chopped |
 | garlic | 2 | cloves | finely chopped |
 | sage | 2 | sprigs | | 
 | rosemary | 2 | sprigs 
