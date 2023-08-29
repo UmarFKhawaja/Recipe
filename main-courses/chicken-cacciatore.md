@@ -5,12 +5,12 @@
 | Description | Amount | Quantity | Preparation |
 | --- | --- | --- | --- |
 | olive oil | 1 | tbsp | |
-| prosciutto | 3 | slices | fat removed & chopped |
-| onion | 1 | bulb | medium, chopped |
+| turkey bacon | 3 | slices | fat removed & chopped |
+| onion | 1 | bulb | chopped |
 | garlic | 2 | cloves | finely chopped |
 | sage | 2 | sprigs | | 
 | rosemary | 2 | sprigs 
-| chicken breasts | 4 | | skinless |
+| chicken breasts | 4 | | skin removed |
 | dry white wine | 150 | ml | |
 | plum tomatoes in natural juice | 400 | g | |
 | tomato purée | 1 | tbsp | |
@@ -23,7 +23,7 @@
 
 * Heat the oil in a large non-stick frying pan.
 
-* Tip in the prosciutto and fry for about 2 mins until crisp.
+* Tip in the turkey bacon and fry for about 2 mins until crisp.
 
 * Remove with a slotted spoon, letting any fat drain back into the pan, and set aside.
 
@@ -41,7 +41,7 @@
 
 ### Step 3
 
-* Lower the heat to medium, return the prosciutto to the pan, then stir in the tomatoes (breaking them up with your spoon), tomato purée and mushrooms.
+* Lower the heat to medium, return the turkey bacon to the pan, then stir in the tomatoes breaking them up with your spoon, tomato purée and mushrooms.
 
 * Spoon 4 tbsp of water into the empty tomato can, swirl it around, then pour it into the pan.
 
