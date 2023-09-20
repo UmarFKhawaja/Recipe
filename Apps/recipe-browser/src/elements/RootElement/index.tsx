@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Box, Button, Container, Overlay, Text, Title } from '@mantine/core';
-import classes from './index.module.css';
+import classes from './styles';
 
 export function RootElement() {
   return (

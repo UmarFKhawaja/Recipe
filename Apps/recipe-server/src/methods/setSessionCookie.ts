@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Request, Response } from 'express';
 import { sign } from 'jsonwebtoken';
-import { SESSION_COOKIE_NAME } from '../constants';
+import { SESSION_COOKIE_NAME, SESSION_HEADER_NAME } from '../constants';
 import { User } from '../entities';
 import { Config } from '../types';
 
@@ -15,21 +15,25 @@ export async function setSessionCookie(req: Request, res: Response): Promise<voi
     emailAddress
   } = req.user as unknown as User;
 
+  const token = sign({
+    id,
+    displayName,
+    userName,
+    emailAddress
+  }, config.session.secret, {
+    expiresIn: '1d'
+  });
+
   res.cookie(SESSION_COOKIE_NAME, {
-    token: sign({
-      id,
-      displayName,
-      userName,
-      emailAddress
-    }, config.session.secret, {
-      expiresIn: '1d'
-    })
+    token
   }, {
     path: '/',
     httpOnly: true,
     secure: false,
     expires: dayjs().add(1, 'day').toDate()
   });
+
+  res.header(SESSION_HEADER_NAME, token);
 
   res.end();
 }

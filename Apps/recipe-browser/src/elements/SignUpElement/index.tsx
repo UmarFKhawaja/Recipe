@@ -1,27 +1,13 @@
-import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Anchor, Box, Button, Container, Group, Paper, PasswordInput, Text, TextInput, Title } from '@mantine/core';
-import { useForm, UseFormReturnType } from '@mantine/form';
-import { SignUpForm } from './types';
-import classes from './index.module.css';
+import { useData } from './hooks';
+import classes from './styles';
 
 export function SignUpElement() {
-  const form: UseFormReturnType<SignUpForm> = useForm<SignUpForm>({
-    initialValues: {
-      userName: '',
-      password1: '',
-      password2: ''
-    },
-    validate: {
-      userName: (value: string): boolean => !value,
-      password1: (value: string): boolean => !value,
-      password2: (value: string): boolean => !value
-    }
-  });
-
-  const submit = useCallback((values: SignUpForm) => {
-    alert(values);
-  }, []);
+  const {
+    form,
+    submit
+  } = useData();
 
   return (
     <Box className={classes.hero}>
@@ -40,10 +26,26 @@ export function SignUpElement() {
           <form onSubmit={form.onSubmit(submit)}>
             <TextInput
               size="lg"
-              label="Email"
+              label="Display name"
+              placeholder="Your Name"
+              required
+              {...form.getInputProps('displayName')}
+            />
+            <TextInput
+              size="lg"
+              label="User name"
+              placeholder="Your_User_Name"
+              required
+              mt="md"
+              {...form.getInputProps('userName')}
+            />
+            <TextInput
+              size="lg"
+              label="Email address"
               placeholder="you@mantine.dev"
               required
-              {...form.getInputProps('userName')}
+              mt="md"
+              {...form.getInputProps('emailAddress')}
             />
             <PasswordInput
               size="lg"

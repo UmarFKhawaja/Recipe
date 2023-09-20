@@ -1,25 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Anchor, Box, Button, Container, Group, Paper, PasswordInput, Text, TextInput, Title } from '@mantine/core';
-import classes from './index.module.css';
-import { useForm, UseFormReturnType } from '@mantine/form';
-import { SignInForm } from './types';
-import { useCallback } from 'react';
+import { useData } from './hooks';
+import classes from './styles';
 
 export function SignInElement() {
-  const form: UseFormReturnType<SignInForm> = useForm<SignInForm>({
-    initialValues: {
-      userName: '',
-      password: ''
-    },
-    validate: {
-      userName: (value: string): boolean => !value,
-      password: (value: string): boolean => !value
-    }
-  });
-
-  const submit = useCallback((values: SignInForm) => {
-    alert(values);
-  }, []);
+  const {
+    form,
+    submit
+  } = useData();
 
   return (
     <Box className={classes.hero}>
@@ -38,10 +26,10 @@ export function SignInElement() {
           <form onSubmit={form.onSubmit(submit)}>
             <TextInput
               size="lg"
-              label="Email"
-              placeholder="you@mantine.dev"
+              label="User name or email address"
+              placeholder="Your_User_Name or you@mantine.dev"
               required
-              {...form.getInputProps('userName')}
+              {...form.getInputProps('username')}
             />
             <PasswordInput
               size="lg"
