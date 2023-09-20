@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "watch": "tsc --noEmit --watch",
-    "start": "vite",
+    "start": "dotenv -- vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -30,6 +30,7 @@
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
     "@vitejs/plugin-react": "^4.0.4",
+    "dotenv-cli": "^7.3.0",
     "eslint": "^8.49.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
