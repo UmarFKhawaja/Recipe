@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { Overlay, Container, Title, Button, Text } from '@mantine/core';
+import { Box, Button, Container, Overlay, Text, Title } from '@mantine/core';
 import classes from './index.module.css';
 
 export function RootElement() {
   return (
-    <div className={classes.hero}>
+    <Box className={classes.hero}>
       <Overlay
         gradient="linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, .65) 40%)"
         opacity={1}
@@ -21,6 +21,6 @@ export function RootElement() {
           Get started
         </Button>
       </Container>
-    </div>
+    </Box>
   );
 }

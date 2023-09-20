@@ -18,10 +18,10 @@ distinguished_name=dn
 C=UK
 ST=West Midlands
 L=Solihull
-O=Banter
+O=Huntingdon Research
 OU=Research and Development
-emailAddress=info@banter.cafe
-CN=Banter
+emailAddress=majordomo@huntingdonresearch.com
+CN=Huntingdon Research
 EOF
 
 openssl req -new -sha256 -nodes -out localhost.csr -newkey rsa:4096 -keyout localhost.key -config <(cat localhost.cnf)
@@ -35,7 +35,6 @@ subjectAltName=@alt_names
 
 [alt_names]
 DNS.1=localhost
-DNS.2=banter.local
 EOF
 
 if [ -e ~/Keys/huntingdonresearch.srl ]; then
