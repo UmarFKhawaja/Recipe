@@ -5,11 +5,11 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    https: {
-      cert: fs.readFileSync('../../Keys/localhost.crt'),
-      key: fs.readFileSync('../../Keys/localhost.key')
-    },
-    port: 5080
+    https: process.env.SERVER_CRT_FILE && process.env.SERVER_KEY_FILE ? {
+      cert: fs.readFileSync(process.env.SERVER_CRT_FILE),
+      key: fs.readFileSync(process.env.SERVER_KEY_FILE)
+    } : false,
+    port: parseInt(process.env.SERVER_PORT || '5080')
   },
   plugins: [react()]
 });

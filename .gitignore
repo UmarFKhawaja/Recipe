@@ -1,2 +1,8 @@
-node_modules/
-Keys/
+/node_modules
+
+/Apps/**/node_modules
+/Apps/**/.env
+/Keys/localhost.*
+/Services/**/.env
+
+/.env
