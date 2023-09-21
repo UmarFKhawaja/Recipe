@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 import { Ingredient, Recipe, Step, Task, Unit, User } from '../entities';
-import { CreateSchema1693454676042 } from '../migrations';
+import { AddCreateAndUpdateDateColumns1695246808249, CreateSchema1693454676042 } from '../migrations';
 import { Config } from '../types';
 
 const config: Config = Config.instance;
@@ -12,7 +12,7 @@ export const DATA_SOURCE: DataSource = new DataSource({
   username: config.database.username,
   password: config.database.password,
   database: config.database.database,
-  synchronize: true,
+  synchronize: false,
   logging: false,
   entities: [
     Ingredient,
@@ -23,7 +23,8 @@ export const DATA_SOURCE: DataSource = new DataSource({
     User
   ],
   migrations: [
-    CreateSchema1693454676042
+    CreateSchema1693454676042,
+    AddCreateAndUpdateDateColumns1695246808249
   ],
   subscribers: [
   ]

@@ -1,6 +1,8 @@
 /node_modules
 
 /Apps/**/node_modules
+/Apps/**/build
+/Apps/**/lib
 /Apps/**/.env
 /Keys/localhost.*
 /Services/**/.env

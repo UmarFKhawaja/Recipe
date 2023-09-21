@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { RootElement, SignInElement, SignUpElement } from '../elements';
+import { SignInElement, SignUpElement, ViewDashboardElement, ViewRootElement } from '../elements';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootElement/>
+    element: <ViewRootElement/>
   },
   {
     path: '/sign-in',
@@ -13,5 +13,9 @@ export const router = createBrowserRouter([
   {
     path: '/sign-up',
     element: <SignUpElement/>
+  },
+  {
+    path: '/view/dashboard',
+    element: <ViewDashboardElement/>
   }
 ]);

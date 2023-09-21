@@ -16,5 +16,8 @@ export default defineConfig({
   ],
   envPrefix: [
     'SERVER'
-  ]
+  ],
+  build: {
+    outDir: 'build'
+  }
 });

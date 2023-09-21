@@ -64,8 +64,8 @@ export function SignUpElement() {
               {...form.getInputProps('password2')}
             />
             <Group justify="space-between" mt="md">
-              <Anchor component="button" size="sm">
-                Forgot password?
+              <Anchor component={Link} size="sm" to="/request-new-activation">
+                Expired activation?
               </Anchor>
             </Group>
             <Button size="lg" fullWidth mt="md" type="submit">

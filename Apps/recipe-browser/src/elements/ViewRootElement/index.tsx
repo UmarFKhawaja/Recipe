@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Box, Button, Container, Overlay, Text, Title } from '@mantine/core';
 import classes from './styles';
 
-export function RootElement() {
+export function ViewRootElement() {
   return (
     <Box className={classes.hero}>
       <Overlay

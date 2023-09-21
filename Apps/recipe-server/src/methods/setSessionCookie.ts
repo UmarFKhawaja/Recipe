@@ -33,7 +33,5 @@ export async function setSessionCookie(req: Request, res: Response): Promise<voi
     expires: dayjs().add(1, 'day').toDate()
   });
 
-  res.header(SESSION_HEADER_NAME, token);
-
-  res.end();
+  res.json({ [SESSION_HEADER_NAME]: token });
 }

@@ -6,4 +6,4 @@ export const EMPTY_SERVICE_STATUS_FUNCTION: ServiceStatusFunction = async (): Pr
 
 export const SESSION_COOKIE_NAME: string = 'session';
 
-export const SESSION_HEADER_NAME: string = 'Session';
+export const SESSION_HEADER_NAME: string = 'X-Session';

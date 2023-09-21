@@ -1,5 +1,13 @@
 import { Field, ID, Int, ObjectType } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, ManyToOne, Column, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  Column,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import { Task } from './Task';
 import { Unit } from './Unit';
 
@@ -13,6 +21,12 @@ export class Ingredient {
   @Field((type) => Int)
   @Column()
   quantity!: number;
+
+  @CreateDateColumn()
+  createDate!: Date;
+
+  @UpdateDateColumn()
+  updateDate!: Date;
 
   @Field((type) => Unit)
   @ManyToOne(() => Unit, (unit: Unit) => unit.ingredients)

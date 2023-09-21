@@ -1,5 +1,14 @@
 import { Field, ID, Int, ObjectType } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import { Recipe } from './Recipe';
 import { Task } from './Task';
 
@@ -17,6 +26,12 @@ export class Step {
   @Field()
   @Column()
   description!: string;
+
+  @CreateDateColumn()
+  createDate!: Date;
+
+  @UpdateDateColumn()
+  updateDate!: Date;
 
   @Field((type) => Recipe)
   @ManyToOne(() => Recipe, (recipe: Recipe) => recipe.steps)

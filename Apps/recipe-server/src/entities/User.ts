@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Recipe } from './Recipe';
 
 @ObjectType()
@@ -31,6 +31,12 @@ export class User {
     nullable: true
   })
   saltHash!: string;
+
+  @CreateDateColumn()
+  createDate!: Date;
+
+  @UpdateDateColumn()
+  updateDate!: Date;
 
   @Field((type) => [Recipe])
   @ManyToMany(() => Recipe, (recipe: Recipe) => recipe.users)

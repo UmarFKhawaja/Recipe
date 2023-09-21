@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, Index } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, Index, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Ingredient } from './Ingredient';
 
 @ObjectType()
@@ -15,6 +15,12 @@ export class Unit {
     unique: true
   })
   description!: string;
+
+  @CreateDateColumn()
+  createDate!: Date;
+
+  @UpdateDateColumn()
+  updateDate!: Date;
 
   @Field((type) => [Ingredient])
   @OneToMany(() => Ingredient, (ingredient: Ingredient) => ingredient.task)

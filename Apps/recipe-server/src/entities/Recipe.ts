@@ -1,5 +1,14 @@
 import { Field, ID, Int, ObjectType } from 'type-graphql';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+  CreateDateColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import { Step } from './Step';
 import { User } from './User';
 
@@ -13,6 +22,12 @@ export class Recipe {
   @Field((type) => Int)
   @Column()
   order!: number;
+
+  @CreateDateColumn()
+  createDate!: Date;
+
+  @UpdateDateColumn()
+  updateDate!: Date;
 
   @Field((type) => [Step])
   @OneToMany(() => Step, (step: Step) => step.recipe)
