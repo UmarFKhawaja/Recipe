@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom';
 import { Box, Button, Container, Text, Title } from '@mantine/core';
 import { useSession } from '../../providers';
+import { useData } from './hooks';
 import classes from './styles';
 
 export function ViewDashboardElement() {
   const { isAuthenticated } = useSession();
+
+  const { submit } = useData();
 
   return (
     <Box>
@@ -15,9 +17,9 @@ export function ViewDashboardElement() {
           more than 120 customizable components and hooks to cover you in any situation
         </Text>
         {
-          !isAuthenticated && (
-            <Button component={Link} variant="gradient" size="xl" className={classes.control} to="/">
-              Get started
+          isAuthenticated && (
+            <Button variant="gradient" size="xl" className={classes.control} onClick={submit}>
+              Sign out
             </Button>
           )
         }

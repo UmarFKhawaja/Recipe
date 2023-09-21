@@ -29,7 +29,10 @@ export async function createExpressServer(config: Config): Promise<{
     }, app)
     : createHttpServer(app);
 
-  app.use(cors());
+  app.use(cors({
+    origin: config.cors.origin,
+    credentials: true
+  }));
   app.use(json());
   app.use(urlencoded({ extended: true }));
   app.use(cookieParser());

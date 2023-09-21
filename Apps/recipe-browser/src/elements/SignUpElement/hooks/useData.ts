@@ -46,6 +46,7 @@ export function useData() {
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify({
         displayName,
         userName,

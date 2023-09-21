@@ -5,6 +5,7 @@ import { IVerifyOptions as IPasswordVerifyOptions, Strategy as PasswordStrategy 
 import { User } from '../entities';
 import { UserService } from '../services';
 import { authorize } from './authorize';
+import { refreshSession } from './refreshSession';
 import { sendProfile } from './sendProfile';
 import { setSessionCookie } from './setSessionCookie';
 import { unsetSessionCookie } from './unsetSessionCookie';
@@ -92,6 +93,8 @@ export async function createAuthRouter(): Promise<Router> {
   router.post('/login/password', passport.authenticate('password'), setSessionCookie);
 
   router.post('/logout', unsetSessionCookie);
+
+  router.get('/refresh', authorize, refreshSession);
 
   router.get('/profile', authorize, sendProfile);
 

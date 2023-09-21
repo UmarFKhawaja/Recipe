@@ -1,16 +1,17 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router';
-import { useCookies } from 'react-cookie';
 import { useForm, UseFormReturnType } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { config } from '../../../config';
-import { SESSION_COOKIE_NAME, SESSION_HEADER_NAME } from '../../../constants';
+import { SESSION_MARKER_COOKIE_NAME } from '../../../constants';
 import { SignInForm } from '../types';
+import { useCookies } from 'react-cookie';
+import dayjs from 'dayjs';
 
 export function useData() {
   const navigate = useNavigate();
 
-  const [_, setCookie] = useCookies([SESSION_COOKIE_NAME]);
+  const [, setCookie] = useCookies([SESSION_MARKER_COOKIE_NAME]);
 
   const form: UseFormReturnType<SignInForm> = useForm<SignInForm>({
     initialValues: {
@@ -34,6 +35,7 @@ export function useData() {
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify({
         username,
         password
@@ -46,15 +48,14 @@ export function useData() {
         color: 'red'
       });
     } else {
-      const json = await response.json();
-
-      const token = json[SESSION_HEADER_NAME];
-
-      setCookie(SESSION_COOKIE_NAME, token);
-
       showNotification({
         message: 'We have signed you in successfully.',
         color: 'green'
+      });
+
+      setCookie(SESSION_MARKER_COOKIE_NAME, {
+        iat: dayjs().toDate().valueOf(),
+        exp: dayjs().add(1, 'hour').toDate().valueOf()
       });
 
       navigate('/view/dashboard');

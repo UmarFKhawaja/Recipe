@@ -1,12 +1,15 @@
 import { readFileSync as readFile } from 'fs';
+import { parseNumber, parseString } from '../methods';
+import { CORSConfig } from './CORSConfig';
 import { DatabaseConfig } from './DatabaseConfig';
 import { ServerConfig } from './ServerConfig';
 import { ServerHttpsConfig } from './ServerHttpsConfig';
 import { SessionConfig } from './SessionConfig';
-import { parseNumber, parseString } from '../methods';
 
 export class Config {
   private static readonly Instance: Config = Config.createInstance();
+
+  private readonly _cors: CORSConfig;
 
   private readonly _server: ServerConfig;
 
@@ -14,7 +17,8 @@ export class Config {
 
   private readonly _database: DatabaseConfig;
 
-  private constructor(server: ServerConfig, session: SessionConfig, database: DatabaseConfig) {
+  private constructor(cors: CORSConfig, server: ServerConfig, session: SessionConfig, database: DatabaseConfig) {
+    this._cors = cors;
     this._server = server;
     this._session = session;
     this._database = database;
@@ -22,6 +26,10 @@ export class Config {
 
   static get instance(): Config {
     return Config.Instance;
+  }
+
+  get cors(): CORSConfig {
+    return this._cors;
   }
 
   get server(): ServerConfig {
@@ -37,37 +45,72 @@ export class Config {
   }
 
   private static createInstance(): Config {
-    const crtFile: string = parseString('SERVER_CRT_FILE', '');
-    const keyFile: string = parseString('SERVER_KEY_FILE', '');
+    const cors: CORSConfig = Config.getCORSConfig();
 
-    const https: ServerHttpsConfig | null = crtFile && keyFile
-      ? {
-        crt: readFile(crtFile, 'utf-8'),
-        key: readFile(keyFile, 'utf-8')
-      }
-      : null;
+    const server: ServerConfig = Config.getServerConfig();
 
-    const port: number = parseNumber('SERVER_PORT', 6180);
+    const session: SessionConfig = Config.getSessionConfig();
 
-    const server: ServerConfig = {
-      https,
-      port
+    const database: DatabaseConfig = Config.getDatabaseConfig();
+
+    const config: Config = new Config(cors, server, session, database);
+
+    return config;
+  }
+
+  private static getCORSConfig(): CORSConfig {
+    function getOrigin(): boolean | string | RegExp | (boolean | string | RegExp)[] {
+      const origin = parseString('CORS_ORIGIN', '*');
+
+      return origin;
+    }
+
+    return {
+      origin: getOrigin()
     };
+  }
 
-    const session: SessionConfig = {
+  private static getSessionConfig(): SessionConfig {
+    return {
+      domain: parseString('SESSION_DOMAIN', ''),
       secret: parseString('SESSION_SECRET', 'the quick brown fox jumped over the lazy dog')
     };
+  }
 
-    const database: DatabaseConfig = {
+  private static getServerConfig(): ServerConfig {
+    function getHttps(): ServerHttpsConfig | null {
+      const crtFile: string = parseString('SERVER_CRT_FILE', '');
+      const keyFile: string = parseString('SERVER_KEY_FILE', '');
+
+      const https: ServerHttpsConfig | null = crtFile && keyFile
+        ? {
+          crt: readFile(crtFile, 'utf-8'),
+          key: readFile(keyFile, 'utf-8')
+        }
+        : null;
+
+      return https;
+    }
+
+    function getPort(): number {
+      const port: number = parseNumber('SERVER_PORT', 6180);
+
+      return port;
+    }
+
+    return {
+      https: getHttps(),
+      port: getPort()
+    };
+  }
+
+  private static getDatabaseConfig(): DatabaseConfig {
+    return {
       host: parseString('DATABASE_HOST', 'localhost'),
       port: parseNumber('DATABASE_PORT', 3306),
       username: parseString('DATABASE_USERNAME', 'recipes'),
       password: parseString('DATABASE_PASSWORD', 'Recipes123'),
       database: parseString('DATABASE_DATABASE', 'recipes')
     };
-
-    const config: Config = new Config(server, session, database);
-
-    return config;
   }
 }
