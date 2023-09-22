@@ -15,5 +15,16 @@ services:
       - recipe
     restart: always
 
+  redis:
+    image: redis:latest
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+      - '${CACHE_PORT}:6379'
+    volumes:
+      - ./recipe-redis/conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - recipe
+    restart: always
+
 networks:
   recipe:

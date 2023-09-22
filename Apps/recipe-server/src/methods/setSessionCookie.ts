@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Request, Response } from 'express';
 import { sign } from 'jsonwebtoken';
-import { SESSION_COOKIE_NAME, SESSION_HEADER_NAME } from '../constants';
+import { SESSION_COOKIE_NAME } from '../constants';
 import { User } from '../entities';
 import { Config } from '../types';
 
@@ -24,6 +24,8 @@ export async function setSessionCookie(req: Request, res: Response): Promise<voi
     expiresIn: '1d'
   });
 
+  const expireDate = dayjs().add(1, 'day').toDate();
+
   res.cookie(SESSION_COOKIE_NAME, {
     token
   }, {
@@ -31,8 +33,8 @@ export async function setSessionCookie(req: Request, res: Response): Promise<voi
     path: '/',
     httpOnly: true,
     secure: true,
-    expires: dayjs().add(1, 'day').toDate()
+    expires: expireDate
   });
 
-  res.json({ [SESSION_HEADER_NAME]: token });
+  res.end();
 }

@@ -1,3 +1,4 @@
+export * from './CacheConfig';
 export * from './Config';
 export * from './Context';
 export * from './DatabaseConfig';

@@ -3,15 +3,13 @@ import { useNavigate } from 'react-router';
 import { useForm, UseFormReturnType } from '@mantine/form';
 import { showNotification } from '@mantine/notifications';
 import { config } from '../../../config';
-import { SESSION_MARKER_COOKIE_NAME } from '../../../constants';
+import { useSession } from '../../../providers';
 import { SignInForm } from '../types';
-import { useCookies } from 'react-cookie';
-import dayjs from 'dayjs';
 
 export function useData() {
   const navigate = useNavigate();
 
-  const [, setCookie] = useCookies([SESSION_MARKER_COOKIE_NAME]);
+  const { invalidateAuthentication } = useSession();
 
   const form: UseFormReturnType<SignInForm> = useForm<SignInForm>({
     initialValues: {
@@ -53,10 +51,7 @@ export function useData() {
         color: 'green'
       });
 
-      setCookie(SESSION_MARKER_COOKIE_NAME, {
-        iat: dayjs().toDate().valueOf(),
-        exp: dayjs().add(1, 'hour').toDate().valueOf()
-      });
+      invalidateAuthentication();
 
       navigate('/view/dashboard');
     }

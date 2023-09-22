@@ -1,3 +1,4 @@
+import { Redis } from 'ioredis';
 import { DataSource } from 'typeorm';
 import { Ingredient, Recipe, Step, Task, Unit, User } from '../entities';
 import { AddCreateAndUpdateDateColumns1695246808249, CreateSchema1693454676042 } from '../migrations';
@@ -28,4 +29,11 @@ export const DATA_SOURCE: DataSource = new DataSource({
   ],
   subscribers: [
   ]
+});
+
+export const CACHE: Redis = new Redis({
+  host: config.cache.host,
+  port: config.cache.port,
+  password: config.cache.password,
+  ...(config.cache.useTLS ? { tls: {} } : {})
 });

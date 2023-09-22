@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { DATA_SOURCE } from './data-source';
+import { DATA_SOURCE } from './connectors';
 import { createExpressServer } from './methods';
 import { Config } from './types';
 

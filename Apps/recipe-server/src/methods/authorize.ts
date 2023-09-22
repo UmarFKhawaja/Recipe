@@ -13,6 +13,7 @@ export async function authorize(req: Request, res: Response, next: NextFunction)
   } else if (req.headers.authorization) {
     passport.authenticate('bearer')(req, res, next);
   } else {
-    next();
+    res.status(401);
+    res.end();
   }
 }

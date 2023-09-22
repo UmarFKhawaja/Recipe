@@ -1,5 +1,5 @@
 import { DataSource, Repository } from 'typeorm';
-import { DATA_SOURCE } from '../data-source';
+import { DATA_SOURCE } from '../connectors';
 import { Step } from '../entities';
 
 export class StepService {

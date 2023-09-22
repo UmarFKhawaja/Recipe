@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { decode, JwtPayload } from 'jsonwebtoken';
 import { DataSource, Repository } from 'typeorm';
 import { EMPTY_ID } from '../constants';
-import { DATA_SOURCE } from '../data-source';
+import { DATA_SOURCE } from '../connectors';
 import { User } from '../entities';
 
 export class UserService {

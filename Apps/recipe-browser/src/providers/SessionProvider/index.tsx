@@ -1,36 +1,42 @@
-import { Context, createContext, useContext, useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { SESSION_MARKER_COOKIE_NAME } from '../../constants';
+import { Context, createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { isValidSession } from './methods';
 import { SessionProviderProps } from './props';
 import { SessionType } from './types';
 import { showNotification } from '@mantine/notifications';
 
 const INITIAL_VALUE: SessionType = {
-  isAuthenticated: false
+  isAuthenticated: false,
+  invalidateAuthentication: () => {}
 };
 
 const SessionContext: Context<SessionType> = createContext<SessionType>(INITIAL_VALUE);
 
 export function SessionProvider({ children }: SessionProviderProps) {
-  const [cookies] = useCookies([SESSION_MARKER_COOKIE_NAME]);
+  const [timestamp, setTimestamp] = useState<number>(new Date().valueOf());
 
-  const [value, setValue] = useState<SessionType>(INITIAL_VALUE);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+  const invalidateAuthentication = useCallback(() => {
+    setTimestamp(new Date().valueOf());
+  }, [setTimestamp]);
 
   useEffect(() => {
-    async function updateValue() {
-      setValue({
-        isAuthenticated: await isValidSession(cookies[SESSION_MARKER_COOKIE_NAME])
+    isValidSession()
+      .then((isAuthenticated) => setIsAuthenticated(isAuthenticated))
+      .catch(() => {
+        showNotification({
+          message: 'We could not validate your session.',
+          color: 'red'
+        });
       });
-    }
 
-    updateValue().then().catch(() => {
-      showNotification({
-        message: 'We could not refresh your session successfully',
-        color: 'yellow'
-      });
-    })
-  }, [value, setValue]);
+    return () => {};
+  }, [isAuthenticated, setIsAuthenticated, timestamp]);
+
+  const value: SessionType = {
+    isAuthenticated,
+    invalidateAuthentication
+  };
 
   return (
     <SessionContext.Provider value={value}>
@@ -40,5 +46,5 @@ export function SessionProvider({ children }: SessionProviderProps) {
 }
 
 export function useSession(): SessionType {
-  return useContext(SessionContext)
+  return useContext(SessionContext);
 }

@@ -1,5 +1,6 @@
 import { createServer as createHttpServer, Server as HttpServer } from 'http';
 import { createServer as createHttpsServer } from 'https';
+import RedisStore from 'connect-redis';
 import express, { Express, urlencoded } from 'express';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
@@ -11,6 +12,7 @@ import { createGraphQLRouter } from './createGraphQLRouter';
 import { createHealthRouter } from './createHealthRouter';
 import { createStatusRouter } from './createStatusRouter';
 import passport from 'passport';
+import { CACHE } from '../connectors';
 
 export async function createExpressServer(config: Config): Promise<{
   app: Express;
@@ -38,8 +40,11 @@ export async function createExpressServer(config: Config): Promise<{
   app.use(cookieParser());
 
   app.use(session({
+    store: new RedisStore({
+      client: <any>CACHE
+    }),
     secret: config.session.secret,
-    resave: true,
+    resave: false,
     saveUninitialized: true
   }));
   app.use(passport.initialize());

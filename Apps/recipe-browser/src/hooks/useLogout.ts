@@ -1,16 +1,15 @@
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router';
 import { showNotification } from '@mantine/notifications';
-import { config } from '../../../config';
-import { useCookies } from 'react-cookie';
-import { SESSION_MARKER_COOKIE_NAME } from '../../../constants';
+import { config } from '../config';
+import { useSession } from '../providers';
 
-export function useData() {
+export function useLogout() {
   const navigate = useNavigate();
 
-  const [, setCookie] = useCookies([SESSION_MARKER_COOKIE_NAME]);
+  const { invalidateAuthentication } = useSession();
 
-  const submit = useCallback(async () => {
+  const logout = useCallback(async () => {
     const response = await fetch(`${config.server.url}/auth/logout`, {
       method: 'POST',
       headers: {
@@ -25,13 +24,13 @@ export function useData() {
         color: 'red'
       });
     } else {
-      setCookie(SESSION_MARKER_COOKIE_NAME, {});
+      invalidateAuthentication();
 
       navigate('/');
     }
   }, [navigate]);
 
   return {
-    submit
+    logout
   };
 }
