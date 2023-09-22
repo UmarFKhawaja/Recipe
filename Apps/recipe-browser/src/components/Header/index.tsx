@@ -39,7 +39,7 @@ export function Header() {
   const theme = useMantineTheme();
 
   const links = data.map((item) => (
-    <FeatureButton key={item.title} title={item.title} description={item.description} icon={item.icon}/>
+    <FeatureButton key={item.title} title={item.title} description={item.description} icon={item.icon} link={item.link}/>
   ));
 
   return (
@@ -51,8 +51,8 @@ export function Header() {
           </Anchor>
 
           <Group h="100%" gap={0} visibleFrom="sm">
-            <Anchor className={classes.link}>
-              Home
+            <Anchor component={Link} className={classes.link} to="/browse/recipes">
+              Recipes
             </Anchor>
             <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
               <HoverCard.Target>
@@ -98,11 +98,11 @@ export function Header() {
                 </div>
               </HoverCard.Dropdown>
             </HoverCard>
-            <Anchor className={classes.link}>
-              Learn
+            <Anchor component={Link} className={classes.link} to="/browse/tutorials">
+              Tutorials
             </Anchor>
-            <Anchor className={classes.link}>
-              Academy
+            <Anchor component={Link} className={classes.link} to="/browse/techniques">
+              Techniques
             </Anchor>
           </Group>
 
@@ -139,8 +139,8 @@ export function Header() {
         <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
           <Divider my="sm"/>
 
-          <Anchor className={classes.link}>
-            Home
+          <Anchor component={Link} className={classes.link} to="/browse/recipes">
+            Recipes
           </Anchor>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
@@ -154,11 +154,11 @@ export function Header() {
             </Center>
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
-          <Anchor className={classes.link}>
-            Learn
+          <Anchor component={Link} className={classes.link} to="/browse/tutorials">
+            Tutorials
           </Anchor>
-          <Anchor className={classes.link}>
-            Academy
+          <Anchor component={Link} className={classes.link} to="/browse/techniques">
+            Techniques
           </Anchor>
 
           <Divider my="sm"/>
