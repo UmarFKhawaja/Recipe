@@ -20,18 +20,12 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconChevronDown } from '@tabler/icons-react';
-import { useLogout } from '../../hooks';
-import { useSession } from '../../providers';
 import logo from './assets/logo.png';
-import { FeatureButton } from './components';
+import { AccountActions, FeatureButton } from './components';
 import { data } from './data';
 import classes from './styles';
 
 export function Header() {
-  const { isAuthenticated } = useSession();
-
-  const { logout } = useLogout();
-
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
 
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
@@ -72,7 +66,7 @@ export function Header() {
               <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
                 <Group justify="space-between" px="md">
                   <Text fw={500}>Features</Text>
-                  <Anchor href="#" fz="xs">
+                  <Anchor component={Link} fz="xs" to="/browse/features">
                     View all
                   </Anchor>
                 </Group>
@@ -83,19 +77,19 @@ export function Header() {
                   {links}
                 </SimpleGrid>
 
-                <div className={classes.dropdownFooter}>
+                <Box className={classes.dropdownFooter}>
                   <Group justify="space-between">
-                    <div>
+                    <Box>
                       <Text fw={500} fz="sm">
                         Get started
                       </Text>
                       <Text size="xs" c="dimmed">
                         Their food sources have decreased, and their numbers
                       </Text>
-                    </div>
-                    <Button variant="default">Get started</Button>
+                    </Box>
+                    <Button component={Link} variant="default" to="/manage">Get started</Button>
                   </Group>
-                </div>
+                </Box>
               </HoverCard.Dropdown>
             </HoverCard>
             <Anchor component={Link} className={classes.link} to="/browse/tutorials">
@@ -107,20 +101,7 @@ export function Header() {
           </Group>
 
           <Group visibleFrom="sm">
-            {
-              isAuthenticated
-                ? (
-                  <>
-                    <Button variant="default" onClick={logout}>Sign out</Button>
-                  </>
-                )
-                : (
-                  <>
-                    <Button component={Link} variant="default" to="/sign-in">Sign in</Button>
-                    <Button component={Link} to="/sign-up">Sign up</Button>
-                  </>
-                )
-            }
+            <AccountActions/>
           </Group>
 
           <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm"/>
@@ -164,20 +145,7 @@ export function Header() {
           <Divider my="sm"/>
 
           <Group justify="center" grow pb="xl" px="md">
-            {
-              isAuthenticated
-                ? (
-                  <>
-                    <Button variant="default" onClick={logout}>Sign out</Button>
-                  </>
-                )
-                : (
-                  <>
-                    <Button component={Link} variant="default" to="/sign-in">Sign in</Button>
-                    <Button component={Link} to="/sign-up">Sign up</Button>
-                  </>
-                )
-            }
+            <AccountActions/>
           </Group>
         </ScrollArea>
       </Drawer>

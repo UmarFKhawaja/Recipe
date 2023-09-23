@@ -53,7 +53,7 @@ export function useData() {
 
       invalidateAuthentication();
 
-      navigate('/view/dashboard');
+      navigate('/manage');
     }
   }, [navigate]);
 

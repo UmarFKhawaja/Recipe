@@ -1,8 +1,12 @@
+import { useOutlet } from 'react-router';
 import { Box, Container, Text, Title } from '@mantine/core';
 import { Header } from '../../components';
+import { ManageEverythingElement } from '../ManageEverythingElement';
 import classes from './styles';
 
-export function ViewDashboardElement() {
+export function ManageElement() {
+  const outlet = useOutlet();
+
   return (
     <Box>
       <Header/>
@@ -12,6 +16,11 @@ export function ViewDashboardElement() {
           Build fully functional accessible web applications faster than ever – Mantine includes
           more than 120 customizable components and hooks to cover you in any situation
         </Text>
+        {
+          outlet
+            ? outlet
+            : <ManageEverythingElement/>
+        }
       </Container>
     </Box>
   );

@@ -1,8 +1,9 @@
-import { Context, createContext, useCallback, useContext, useState } from 'react';
+import { Context, createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { showNotification } from '@mantine/notifications';
 import { isValidSession } from './methods';
 import { SessionProviderProps } from './props';
 import { SessionType } from './types';
+import { useIdle } from '@mantine/hooks';
 
 const INITIAL_VALUE: SessionType = {
   isAuthenticated: false,
@@ -14,6 +15,8 @@ const SessionContext: Context<SessionType> = createContext<SessionType>(INITIAL_
 export function SessionProvider({ children }: SessionProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
+  const idle = useIdle(1000);
+
   const invalidateAuthentication = useCallback(() => {
     isValidSession()
       .then((isAuthenticated) => setIsAuthenticated(isAuthenticated))
@@ -24,6 +27,10 @@ export function SessionProvider({ children }: SessionProviderProps) {
         });
       });
   }, [setIsAuthenticated]);
+
+  useEffect(() => {
+    invalidateAuthentication();
+  }, [idle]);
 
   const value: SessionType = {
     isAuthenticated,

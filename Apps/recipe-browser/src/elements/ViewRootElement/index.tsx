@@ -15,7 +15,7 @@ export function ViewRootElement() {
           more than 120 customizable components and hooks to cover you in any situation
         </Text>
 
-        <Button component={Link} variant="gradient" size="xl" className={classes.control} to={isAuthenticated ? '/view/dashboard' : '/sign-in'}>
+        <Button component={Link} variant="gradient" size="xl" className={classes.control} to={isAuthenticated ? '/manage' : '/sign-in'}>
           Get started
         </Button>
       </Container>
