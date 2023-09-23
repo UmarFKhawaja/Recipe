@@ -1,6 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import {
-  ManageElement, ManagePlansElement, ManageProfileElement, ManageRecipesElement, ManageSettingsElement,
+  ManageElement,
+  ManageOverviewElement,
+  ManagePlansElement,
+  ManageProfileElement,
+  ManageRecipesElement,
+  ManageSettingsElement,
   ShowPlaceholderElement,
   SignInElement,
   SignUpElement,
@@ -24,6 +29,10 @@ export const router = createBrowserRouter([
     path: '/manage',
     element: <ManageElement/>,
     children: [
+      {
+        path: '',
+        element: <ManageOverviewElement/>
+      },
       {
         path: 'plans',
         element: <ManagePlansElement/>

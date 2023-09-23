@@ -1,5 +1,5 @@
 export * from './ManageElement';
-export * from './ManageEverythingElement';
+export * from './ManageOverviewElement';
 export * from './ManagePlansElement';
 export * from './ManageProfileElement';
 export * from './ManageRecipesElement';
