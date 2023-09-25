@@ -1,0 +1,24 @@
+{
+   "name": "recipe-helper",
+   "version": "0.0.0",
+   "bin": {
+      "recipe": "bin/recipe.js"
+   },
+   "main": "lib/index.js",
+   "scripts": {
+      "build": "tsc",
+      "watch": "tsc --watch",
+      "start": "dotenv -- node src/index.ts"
+   },
+   "dependencies": {
+      "@faker-js/faker": "^8.1.0",
+      "dayjs": "^1.11.10",
+      "reflect-metadata": "^0.1.13"
+   },
+   "devDependencies": {
+      "@types/node": "^18.17.18",
+      "dotenv-cli": "^7.3.0",
+      "ts-node": "10.9.1",
+      "typescript": "5.2.2"
+   }
+}
