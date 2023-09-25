@@ -1,7 +1,6 @@
 import 'reflect-metadata';
-import { DATA_SOURCE } from './connectors';
+import { Config, DATA_SOURCE } from 'recipe-data';
 import { createExpressServer } from './methods';
-import { Config } from './types';
 
 process.nextTick(async () => {
   const config: Config = Config.instance;

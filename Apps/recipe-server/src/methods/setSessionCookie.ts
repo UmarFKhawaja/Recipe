@@ -1,9 +1,8 @@
 import dayjs from 'dayjs';
 import { Request, Response } from 'express';
 import { sign } from 'jsonwebtoken';
+import { Config, User } from 'recipe-data';
 import { SESSION_COOKIE_NAME } from '../constants';
-import { User } from '../entities';
-import { Config } from '../types';
 
 export async function setSessionCookie(req: Request, res: Response): Promise<void> {
   const config: Config = Config.instance;

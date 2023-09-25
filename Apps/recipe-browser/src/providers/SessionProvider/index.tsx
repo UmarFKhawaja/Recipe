@@ -1,17 +1,11 @@
-import { Context, createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { showNotification } from '@mantine/notifications';
 import { config } from '../../config';
+import { SessionContext } from './contexts';
 import { isValidSession } from './methods';
 import { SessionProviderProps } from './props';
 import { SessionType } from './types';
-
-const INITIAL_VALUE: SessionType = {
-  isAuthenticated: false,
-  invalidateAuthentication: () => {}
-};
-
-const SessionContext: Context<SessionType> = createContext<SessionType>(INITIAL_VALUE);
 
 export function SessionProvider({ children }: SessionProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -29,7 +23,7 @@ export function SessionProvider({ children }: SessionProviderProps) {
 
   useEffect(() => {
     invalidateAuthentication();
-  }, []);
+  }, [invalidateAuthentication]);
 
   const value: SessionType = {
     isAuthenticated,
@@ -48,8 +42,4 @@ export function SessionProvider({ children }: SessionProviderProps) {
       </ApolloProvider>
     </SessionContext.Provider>
   );
-}
-
-export function useSession(): SessionType {
-  return useContext(SessionContext);
 }

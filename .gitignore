@@ -4,6 +4,9 @@
 /Apps/**/build
 /Apps/**/lib
 /Apps/**/.env
+/Libraries/**/lib
+/Libraries/**/node_modules
+/Libraries/**/.env
 /Keys/localhost.*
 /Services/**/.env
 

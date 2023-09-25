@@ -37,7 +37,7 @@ export function useInfiniteData<T extends { id: string; }>(request: InfiniteData
         skip
       }
     });
-  }, [fetchMoreImpl, setSkip, take]);
+  }, [fetchMoreImpl, skip, setSkip, take]);
 
   return {
     items,

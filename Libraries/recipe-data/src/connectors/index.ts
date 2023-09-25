@@ -27,8 +27,7 @@ export const DATA_SOURCE: DataSource = new DataSource({
   migrations: [
     CreateSchema1695670716740
   ],
-  subscribers: [
-  ],
+  subscribers: [],
   migrationsTableName: 'migration'
 });
 

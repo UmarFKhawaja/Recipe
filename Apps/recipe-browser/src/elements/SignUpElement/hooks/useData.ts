@@ -68,7 +68,7 @@ export function useData() {
 
       navigate('/sign-in');
     }
-  }, [navigate]);
+  }, [navigate, form]);
 
   return {
     form,

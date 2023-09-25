@@ -28,7 +28,7 @@ export function useLogout() {
 
       navigate('/');
     }
-  }, [navigate]);
+  }, [navigate, invalidateAuthentication]);
 
   return {
     logout

@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
+import { InfiniteDataRequestVariables } from './InfiniteDataRequestVariables';
 
 export interface InfiniteDataRequest {
   name: string;
   command: string;
-  variables: Record<string, any>;
+  variables: InfiniteDataRequestVariables;
   skip: number;
   setSkip: Dispatch<SetStateAction<number>>;
   take: number;

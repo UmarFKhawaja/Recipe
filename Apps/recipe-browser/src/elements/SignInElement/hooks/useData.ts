@@ -55,7 +55,7 @@ export function useData() {
 
       navigate('/manage');
     }
-  }, [navigate]);
+  }, [navigate, invalidateAuthentication]);
 
   return {
     form,

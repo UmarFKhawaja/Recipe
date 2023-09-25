@@ -4,6 +4,10 @@
   "scripts": {},
   "devDependencies": {
     "concurrently": "^8.2.1",
-    "lerna": "^6.6.2"
-  }
+    "lerna": "^7.3.0"
+  },
+  "workspaces": [
+    "Apps/*",
+    "Libraries/*"
+  ]
 }
