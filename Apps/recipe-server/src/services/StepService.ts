@@ -36,4 +36,18 @@ export class StepService {
 
     return step;
   }
+
+  async findStepByPhotoID(photoID: string): Promise<Step | null> {
+    const stepRepository: Repository<Step> = this.dataSource.getRepository(Step);
+
+    const step: Step | null = await stepRepository.findOne({
+      where: {
+        photos: {
+          id: photoID
+        }
+      }
+    });
+
+    return step;
+  }
 }

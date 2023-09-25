@@ -1,7 +1,7 @@
 import { Redis } from 'ioredis';
 import { DataSource } from 'typeorm';
-import { Ingredient, Recipe, Step, Task, Unit, User } from '../entities';
-import { CreateSchema1695648913353 } from '../migrations';
+import { Ingredient, Photo, Recipe, Step, Task, Unit, User } from '../entities';
+import { AddPhotosTable1695662069281, CreateSchema1695648913353 } from '../migrations';
 import { Config } from '../types';
 
 const config: Config = Config.instance;
@@ -17,6 +17,7 @@ export const DATA_SOURCE: DataSource = new DataSource({
   logging: false,
   entities: [
     Ingredient,
+    Photo,
     Recipe,
     Step,
     Task,
@@ -24,10 +25,12 @@ export const DATA_SOURCE: DataSource = new DataSource({
     User
   ],
   migrations: [
-    CreateSchema1695648913353
+    CreateSchema1695648913353,
+    AddPhotosTable1695662069281
   ],
   subscribers: [
-  ]
+  ],
+  migrationsTableName: 'migration'
 });
 
 export const CACHE: Redis = new Redis({

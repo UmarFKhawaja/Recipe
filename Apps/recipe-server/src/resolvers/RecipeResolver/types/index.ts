@@ -1,4 +1,3 @@
-export * from './GetRecipeByIDArgs';
-export * from './GetRecipesArgs';
+export * from './PhotosArgs';
 export * from './StepsArgs';
 export * from './UsersArgs';

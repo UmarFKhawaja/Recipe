@@ -1,43 +1,21 @@
-import { Args, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql';
-import { Recipe, Step, User } from '../../entities';
-import { RecipeService, StepService, UserService } from '../../services';
-import { Context, RecipePage } from '../../types';
-import { GetRecipeByIDArgs, GetRecipesArgs, StepsArgs, UsersArgs } from './types';
+import { Args, Ctx, FieldResolver, Resolver, Root } from 'type-graphql';
+import { Photo, Recipe, Step, User } from '../../entities';
+import { PhotoService, StepService, UserService } from '../../services';
+import { Context } from '../../types';
+import { PhotosArgs, StepsArgs, UsersArgs } from './types';
 
 @Resolver((of) => Recipe)
 export class RecipeResolver {
-  private readonly stepService: StepService;
+  private readonly photoService: PhotoService;
 
-  private readonly recipeService: RecipeService;
+  private readonly stepService: StepService;
 
   private readonly userService: UserService;
 
   constructor() {
+    this.photoService = new PhotoService();
     this.stepService = new StepService();
-    this.recipeService = new RecipeService();
     this.userService = new UserService();
-  }
-
-  @Query((returns) => RecipePage, {
-    nullable: false
-  })
-  async getRecipes(@Args() args: GetRecipesArgs): Promise<RecipePage> {
-    const { skip, take }: GetRecipesArgs = args;
-
-    const recipePage: RecipePage = await this.recipeService.findRecipes(skip, take);
-
-    return recipePage;
-  }
-
-  @Query((returns) => Recipe, {
-    nullable: true
-  })
-  async getRecipeByID(@Args() args: GetRecipeByIDArgs): Promise<Recipe | null> {
-    const { id }: GetRecipeByIDArgs = args;
-
-    const recipe: Recipe | null = await this.recipeService.findRecipeByID(id);
-
-    return recipe;
   }
 
   @FieldResolver()
@@ -56,5 +34,14 @@ export class RecipeResolver {
     const users: User[] = await this.userService.findUsersByRecipeID(recipeID);
 
     return users;
+  }
+
+  @FieldResolver()
+  async photos(@Root() recipe: Recipe, @Args() args: PhotosArgs, @Ctx() context: Context): Promise<Photo[]> {
+    const { id: recipeID }: Recipe = recipe;
+
+    const photos: Photo[] = await this.photoService.findPhotosByRecipeID(recipeID);
+
+    return photos;
   }
 }

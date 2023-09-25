@@ -13,7 +13,12 @@ export class UserService {
     this.dataSource = DATA_SOURCE;
   }
 
-  async registerUser({ displayName, userName, emailAddress, password }: { displayName: string, userName: string, emailAddress: string, password: string }): Promise<boolean> {
+  async registerUser({ displayName, userName, emailAddress, password }: {
+    displayName: string,
+    userName: string,
+    emailAddress: string,
+    password: string
+  }): Promise<boolean> {
     try {
       const dataSource: DataSource = DATA_SOURCE;
       const userRepository: Repository<User> = dataSource.getRepository(User);
@@ -159,5 +164,19 @@ export class UserService {
     });
 
     return users;
+  }
+
+  async findUserByPhotoID(photoID: string): Promise<User | null> {
+    const userRepository: Repository<User> = this.dataSource.getRepository(User);
+
+    const user: User | null = await userRepository.findOne({
+      where: {
+        photo: {
+          id: photoID
+        }
+      }
+    });
+
+    return user;
   }
 }

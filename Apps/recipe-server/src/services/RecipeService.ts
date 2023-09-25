@@ -64,4 +64,18 @@ export class RecipeService {
 
     return new RecipePage(recipes, skip, take, count, hasMore);
   }
+
+  async findRecipeByPhotoID(photoID: string): Promise<Recipe | null> {
+    const recipeRepository: Repository<Recipe> = this.dataSource.getRepository(Recipe);
+
+    const recipe: Recipe | null = await recipeRepository.findOne({
+      where: {
+        photos: {
+          id: photoID
+        }
+      }
+    });
+
+    return recipe;
+  }
 }

@@ -36,4 +36,18 @@ export class TaskService {
 
     return task;
   }
+
+  async findTaskByPhotoID(photoID: string): Promise<Task | null> {
+    const taskRepository: Repository<Task> = this.dataSource.getRepository(Task);
+
+    const task: Task | null = await taskRepository.findOne({
+      where: {
+        photos: {
+          id: photoID
+        }
+      }
+    });
+
+    return task;
+  }
 }

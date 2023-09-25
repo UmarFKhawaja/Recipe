@@ -36,4 +36,18 @@ export class IngredientService {
 
     return ingredients;
   }
+
+  async findIngredientByPhotoID(photoID: string): Promise<Ingredient | null> {
+    const ingredientRepository: Repository<Ingredient> = this.dataSource.getRepository(Ingredient);
+
+    const ingredient: Ingredient | null = await ingredientRepository.findOne({
+      where: {
+        photos: {
+          id: photoID
+        }
+      }
+    });
+
+    return ingredient;
+  }
 }

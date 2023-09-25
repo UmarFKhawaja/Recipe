@@ -1,16 +1,19 @@
 import { Args, Ctx, FieldResolver, Resolver, Root } from 'type-graphql';
-import { Ingredient, Task, Unit } from '../../entities';
-import { TaskService, UnitService } from '../../services';
+import { Ingredient, Photo, Task, Unit } from '../../entities';
+import { PhotoService, TaskService, UnitService } from '../../services';
 import { Context } from '../../types';
-import { TaskArgs, UnitArgs } from './types';
+import { PhotosArgs, TaskArgs, UnitArgs } from './types';
 
 @Resolver((of) => Ingredient)
 export class IngredientResolver {
+  private readonly photoService: PhotoService;
+
   private readonly taskService: TaskService;
 
   private readonly unitService: UnitService;
 
   constructor() {
+    this.photoService = new PhotoService();
     this.taskService = new TaskService();
     this.unitService = new UnitService();
   }
@@ -35,5 +38,14 @@ export class IngredientResolver {
     const task: Task | null = await this.taskService.findTaskByIngredientID(ingredientID);
 
     return task;
+  }
+
+  @FieldResolver()
+  async photos(@Root() ingredient: Ingredient, @Args() args: PhotosArgs, @Ctx() context: Context): Promise<Photo[]> {
+    const { id: ingredientID }: Ingredient = ingredient;
+
+    const photos: Photo[] = await this.photoService.findPhotosByIngredientID(ingredientID);
+
+    return photos;
   }
 }

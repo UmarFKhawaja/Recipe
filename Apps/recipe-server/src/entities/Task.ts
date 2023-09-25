@@ -1,16 +1,17 @@
 import { Field, ID, ObjectType } from 'type-graphql';
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
-  JoinColumn,
-  CreateDateColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
 import { Step } from './Step';
 import { Ingredient } from './Ingredient';
+import { Photo } from './Photo';
 
 @ObjectType()
 @Entity()
@@ -43,4 +44,8 @@ export class Task {
   @Field((type) => [Ingredient])
   @OneToMany(() => Ingredient, (ingredient: Ingredient) => ingredient.task)
   ingredients!: Ingredient[];
+
+  @Field((type) => [Photo])
+  @OneToMany(() => Photo, (photo: Photo) => photo.task)
+  photos!: Photo[];
 }

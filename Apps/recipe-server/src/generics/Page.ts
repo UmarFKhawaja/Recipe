@@ -1,5 +1,5 @@
-import { ObjectLiteral } from 'typeorm';
 import { ClassType, Field, Int, ObjectType } from 'type-graphql';
+import { ObjectLiteral } from 'typeorm';
 
 export function Page<T extends ObjectLiteral>(TClass: ClassType<T>) {
   @ObjectType()

@@ -1,4 +1,2 @@
-export * from './GetUserByEmailAddressArgs';
-export * from './GetUserByIDArgs';
-export * from './GetUserByUserNameArgs';
+export * from './PhotoArgs';
 export * from './RecipesArgs';

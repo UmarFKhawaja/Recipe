@@ -1,18 +1,18 @@
 import { createServer as createHttpServer, Server as HttpServer } from 'http';
 import { createServer as createHttpsServer } from 'https';
+import { json } from 'body-parser';
 import RedisStore from 'connect-redis';
-import express, { Express, urlencoded } from 'express';
-import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import { json } from 'body-parser';
+import express, { Express, urlencoded } from 'express';
+import session from 'express-session';
+import passport from 'passport';
+import { CACHE } from '../connectors';
 import { Config } from '../types';
 import { createAuthRouter } from './createAuthRouter';
 import { createGraphQLRouter } from './createGraphQLRouter';
 import { createHealthRouter } from './createHealthRouter';
 import { createStatusRouter } from './createStatusRouter';
-import passport from 'passport';
-import { CACHE } from '../connectors';
 
 export async function createExpressServer(config: Config): Promise<{
   app: Express;

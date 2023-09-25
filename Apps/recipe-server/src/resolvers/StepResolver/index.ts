@@ -1,16 +1,19 @@
 import { Args, Ctx, FieldResolver, Resolver, Root } from 'type-graphql';
-import { Recipe, Step, Task } from '../../entities';
-import { RecipeService, TaskService } from '../../services';
+import { Photo, Recipe, Step, Task } from '../../entities';
+import { PhotoService, RecipeService, TaskService } from '../../services';
 import { Context } from '../../types';
-import { RecipeArgs, TasksArgs } from './types';
+import { PhotosArgs, RecipeArgs, TasksArgs } from './types';
 
 @Resolver((of) => Step)
 export class StepResolver {
+  private readonly photoService: PhotoService;
+
   private readonly recipeService: RecipeService;
 
   private readonly taskService: TaskService;
 
   constructor() {
+    this.photoService = new PhotoService();
     this.recipeService = new RecipeService();
     this.taskService = new TaskService();
   }
@@ -33,5 +36,14 @@ export class StepResolver {
     const tasks: Task[] = await this.taskService.findTasksByStepID(stepID);
 
     return tasks;
+  }
+
+  @FieldResolver()
+  async photos(@Root() step: Step, @Args() args: PhotosArgs, @Ctx() context: Context): Promise<Photo[]> {
+    const { id: stepID }: Step = step;
+
+    const photos: Photo[] = await this.photoService.findPhotosByStepID(stepID);
+
+    return photos;
   }
 }
