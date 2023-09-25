@@ -1,5 +1,7 @@
 # Chicken Cacciatore
 
+The classic Italian 'hunter's stew' gets a healthy makeover, with low-fat chicken breasts, prosciutto and a rich herby tomato sauce.
+
 ## Ingredients
 
 | Description | Quantity | Units | Preparation |

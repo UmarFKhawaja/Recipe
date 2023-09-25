@@ -1,5 +1,7 @@
 # Chicken Satay Salad
 
+Try this no-fuss, midweek meal that's high in protein and big on flavour. Marinate chicken breasts, then drizzle with a punchy peanut satay sauce.
+
 ## Ingredients
 
 | Description | Quantity | Units | Preparation |
