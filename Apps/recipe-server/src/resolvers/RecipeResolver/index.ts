@@ -1,8 +1,8 @@
 import { Args, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql';
 import { Recipe, Step, User } from '../../entities';
 import { RecipeService, StepService, UserService } from '../../services';
-import { Context } from '../../types';
-import { GetRecipeByIDArgs, StepsArgs, UsersArgs } from './types';
+import { Context, RecipePage } from '../../types';
+import { GetRecipeByIDArgs, GetRecipesArgs, StepsArgs, UsersArgs } from './types';
 
 @Resolver((of) => Recipe)
 export class RecipeResolver {
@@ -16,6 +16,17 @@ export class RecipeResolver {
     this.stepService = new StepService();
     this.recipeService = new RecipeService();
     this.userService = new UserService();
+  }
+
+  @Query((returns) => RecipePage, {
+    nullable: false
+  })
+  async getRecipes(@Args() args: GetRecipesArgs): Promise<RecipePage> {
+    const { skip, take }: GetRecipesArgs = args;
+
+    const recipePage: RecipePage = await this.recipeService.findRecipes(skip, take);
+
+    return recipePage;
   }
 
   @Query((returns) => Recipe, {
