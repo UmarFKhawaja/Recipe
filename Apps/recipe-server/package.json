@@ -6,7 +6,7 @@
       "build": "tsc",
       "watch": "tsc --watch",
       "start": "dotenv -- nodemon src/index.ts",
-      "typeorm": "dotenv -- typeorm-ts-node-commonjs"
+      "typeorm": "dotenv -- typeorm-ts-node-commonjs --dataSource src/connectors/index.ts"
    },
    "dependencies": {
       "@apollo/server": "^4.9.3",

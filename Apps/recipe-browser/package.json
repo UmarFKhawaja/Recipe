@@ -20,16 +20,20 @@
     "@mantine/notifications": "^7.0.0",
     "@mantine/spotlight": "^7.0.0",
     "@tabler/icons-react": "^2.34.0",
+    "chance": "^1.1.11",
     "dayjs": "^1.11.10",
     "jose": "^4.14.6",
+    "nanoid": "^5.0.1",
     "react": "^18.2.0",
     "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",
     "react-router": "^6.16.0",
     "react-router-dom": "^6.16.0",
-    "swr": "^2.2.2"
+    "swr": "^2.2.2",
+    "typed-graphqlify": "^3.1.6"
   },
   "devDependencies": {
+    "@types/chance": "^1.1.4",
     "@types/node": "^18.17.18",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",

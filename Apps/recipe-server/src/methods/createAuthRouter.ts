@@ -58,7 +58,7 @@ export async function createAuthRouter(): Promise<Router> {
     const user: User | null = await userService.findUserByID(id);
 
     if (!user) {
-      done(new Error('There was an error deserializing the user'));
+      done(null, {});
     } else {
       done(null, user);
     }

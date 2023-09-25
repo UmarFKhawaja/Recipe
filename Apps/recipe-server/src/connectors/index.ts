@@ -1,7 +1,7 @@
 import { Redis } from 'ioredis';
 import { DataSource } from 'typeorm';
 import { Ingredient, Recipe, Step, Task, Unit, User } from '../entities';
-import { AddCreateAndUpdateDateColumns1695246808249, CreateSchema1693454676042 } from '../migrations';
+import { CreateSchema1695648913353 } from '../migrations';
 import { Config } from '../types';
 
 const config: Config = Config.instance;
@@ -24,8 +24,7 @@ export const DATA_SOURCE: DataSource = new DataSource({
     User
   ],
   migrations: [
-    CreateSchema1693454676042,
-    AddCreateAndUpdateDateColumns1695246808249
+    CreateSchema1695648913353
   ],
   subscribers: [
   ]

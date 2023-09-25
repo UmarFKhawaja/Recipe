@@ -1,8 +1,6 @@
-import { Link } from 'react-router-dom';
-import { Anchor, Box, Burger, Divider, Drawer, Group, Image, rem, ScrollArea } from '@mantine/core';
+import { Box, Burger, Divider, Drawer, Group, rem, ScrollArea } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import logo from './assets/logo.png';
-import { AccountActions, CentralMenu, FeatureButton } from './components';
+import { AccountActions, CentralMenu, FeatureButton, LogoImage } from './components';
 import { data } from './data';
 import classes from './styles';
 
@@ -14,12 +12,10 @@ export function Header() {
   ));
 
   return (
-    <Box pb={120}>
+    <Box pb="md">
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
-          <Anchor component={Link} to="/">
-            <Image src={logo} alt="Logo" width={30} height={30}/>
-          </Anchor>
+          <LogoImage/>
 
           <Group h="100%" gap={0} visibleFrom="sm">
             <CentralMenu variant="hover-card" links={links}/>

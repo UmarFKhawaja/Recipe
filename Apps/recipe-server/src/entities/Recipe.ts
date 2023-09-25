@@ -19,6 +19,14 @@ export class Recipe {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
+  @Field()
+  @Column()
+  title!: string;
+
+  @Field()
+  @Column()
+  description!: string;
+
   @Field((type) => Int)
   @Column()
   order!: number;

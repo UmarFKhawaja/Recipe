@@ -9,7 +9,7 @@ export function HoverCardLinks({ links }: HoverCardLinksProps) {
   const theme = useMantineTheme();
 
   return (
-    <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
+    <HoverCard width={600} position="bottom" radius="md" shadow="md">
       <HoverCard.Target>
         <Anchor className={classes.link}>
           <Center inline>
