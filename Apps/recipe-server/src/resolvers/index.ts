@@ -1,4 +1,6 @@
 export * from './IngredientResolver';
+export * from './MutationResolver';
+export * from './PhotoResolver';
 export * from './RecipeResolver';
 export * from './QueryResolver';
 export * from './StepResolver';

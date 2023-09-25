@@ -1,7 +1,10 @@
 import { GraphQLSchema } from 'graphql';
 import { buildSchema } from 'type-graphql';
 import {
-  IngredientResolver, QueryResolver,
+  IngredientResolver,
+  MutationResolver,
+  PhotoResolver,
+  QueryResolver,
   RecipeResolver,
   StepResolver,
   TaskResolver,
@@ -13,6 +16,8 @@ export async function createGraphQLSchema(): Promise<GraphQLSchema> {
   const schema: GraphQLSchema = await buildSchema({
     resolvers: [
       IngredientResolver,
+      MutationResolver,
+      PhotoResolver,
       QueryResolver,
       RecipeResolver,
       StepResolver,

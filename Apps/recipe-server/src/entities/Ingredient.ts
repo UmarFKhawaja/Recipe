@@ -20,6 +20,10 @@ export class Ingredient {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
+  @Field()
+  @Column()
+  description!: string;
+
   @Field((type) => Int)
   @Column()
   quantity!: number;

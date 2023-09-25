@@ -28,10 +28,6 @@ export class Recipe {
   @Column()
   description!: string;
 
-  @Field((type) => Int)
-  @Column()
-  order!: number;
-
   @CreateDateColumn()
   createDate!: Date;
 
