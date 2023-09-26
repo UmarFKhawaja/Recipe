@@ -4,19 +4,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    padding-top: calc(var(--mantine-spacing-xl) * 6);
-    padding-bottom: calc(var(--mantine-spacing-xl) * 6);
     z-index: 1;
-
-    @media (max-width: var(--mantine-breakpoint-sm)) {
-        padding-top: calc(var(--mantine-spacing-xl) * 3);
-        padding-bottom: calc(var(--mantine-spacing-xl) * 3);
-    }
-
-    @media (max-width: var(--mantine-breakpoint-xs)) {
-        padding-top: calc(var(--mantine-spacing-xl));
-        padding-bottom: calc(var(--mantine-spacing-xl));
-    }
 }
 
 .title {
